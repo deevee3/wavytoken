@@ -191,6 +191,11 @@
   .crypto-box{border:1px dashed var(--line);border-radius:6px;padding:20px;background:rgba(201,96,69,.05);margin-bottom:16px}
   .crypto-box p{font-size:14.5px;color:var(--navy);margin-bottom:12px}
   .crypto-box .fine{font-size:13px;color:var(--muted);margin:12px 0 0}
+  .settle-why{border-left:3px solid var(--accent);padding:2px 0 2px 14px;margin:0 0 18px;font-size:14px;line-height:1.62;color:var(--navy)}
+  .settle-why .k2{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--navy-deep);display:block;margin-bottom:6px}
+  .settle-note{font-size:13.5px;line-height:1.62;color:var(--muted);background:rgba(201,96,69,.07);border:1px solid var(--line-soft);border-radius:6px;padding:12px 14px;margin:12px 0 4px}
+  .settle-note b{color:var(--navy-deep);font-weight:500}
+  .payline .rec{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-deep);border:1px solid var(--line-soft);border-radius:999px;padding:2px 9px;margin-left:2px}
   .addr-row{display:flex;gap:10px;align-items:stretch}
   .addr-row code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:#fff;border:1px solid var(--line-soft);border-radius:4px;padding:10px 12px;font-size:12.5px;color:var(--navy);align-self:center}
   .addr-row button{flex:none;padding:10px 18px;border-radius:999px;border:1px solid var(--accent-deep);background:transparent;color:var(--accent-deep);font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
@@ -410,11 +415,15 @@
         <div class="rrow"><label>Wallet</label><input id="e-wallet" placeholder="0x…" spellcheck="false" autocomplete="off"></div>
         <div class="rrow"><label>Email</label><input id="e-email" type="email" placeholder="you@example.com"></div>
       </div>
+      <div class="settle-why"><span class="k2">Settle the way the treasury keeps it.</span>
+        <b>Crypto is the fast lane:</b> your payment lands directly in the on-chain treasury — visible on Basescan within minutes, no middlemen, every cent accounted for in public.<br>
+        <b>Card is welcome too.</b> It simply takes the long way: card → our bank → a manual transfer into the treasury with full accounting. Allow <b>7–10 days</b> before your payment appears in the treasury ledger.</div>
       <div class="rrow"><label>Payment method</label>
-        <label class="payline"><input type="radio" name="e-pay" value="card" checked> Card</label>
-        <label class="payline"><input type="radio" name="e-pay" value="crypto"> Crypto</label>
+        <label class="payline"><input type="radio" name="e-pay" value="crypto" checked> Crypto <span class="rec">recommended</span></label>
+        <label class="payline"><input type="radio" name="e-pay" value="card"> Card</label>
       </div>
       <div id="e-crypto-panel" style="display:none"></div>
+      <div id="e-settle-note" class="settle-note" style="display:none"></div>
       <button class="btn btn-primary" id="engrave-btn" style="width:100%">Engrave my plaque</button>
       <p class="presale-note">Presale — no payment collected today. We'll write to you at launch.</p>
       <div id="engrave-done"></div>
@@ -691,6 +700,18 @@ function cryptoPanelHTML(total, txId){
     '<div class="rrow" style="margin:14px 0 0"><label>Transaction hash (optional)</label><input id="' + txId + '" placeholder="0x…" spellcheck="false" autocomplete="off"></div>' +
     '<p class="fine">We verify every payment on-chain before shipping. Send from the wallet you reserved with.</p></div>';
 }
+/* ============ Settlement explainer ============
+   Shown above the payment choice: why crypto is the fast lane, and the
+   honest timing on card (manual treasury transfer, full accounting).
+================================================================ */
+function settleWhyHTML(){
+  return '<div class="settle-why"><span class="k2">Settle the way the treasury keeps it.</span>' +
+    '<b>Crypto is the fast lane:</b> your payment lands directly in the on-chain treasury \u2014 visible on Basescan within minutes, no middlemen, every cent accounted for in public.<br>' +
+    '<b>Card is welcome too.</b> It simply takes the long way: card \u2192 our bank \u2192 a manual transfer into the treasury with full accounting. Allow <b>7\u201310 days</b> before your payment appears in the treasury ledger.</div>';
+}
+function cardSettleNoteHTML(){
+  return '<b>Heads up:</b> card payments land in our bank first. Moving them into the treasury is a manual step with full accounting \u2014 allow <b>7\u201310 days</b> for your payment to show in the treasury ledger.';
+}
 document.addEventListener("click", e => {
   const b = e.target && e.target.closest ? e.target.closest(".copy-addr") : null;
   if (b && navigator.clipboard) navigator.clipboard.writeText(b.dataset.addr).then(() => { b.textContent = "Copied"; }).catch(() => {});
@@ -762,10 +783,12 @@ function openReserve(sku){
     '<div class="rrow"><label>Email</label><input id="r-email" type="email" placeholder="you@example.com" value="' + esc(data.profile.email || "") + '"></div>' +
     '<div class="rrow"><label class="checkline"><input type="checkbox" id="r-gift"> Sending as a gift</label></div>' +
     '<div class="rrow" id="r-giftto-row" style="display:none"><label>To (name or wallet)</label><input id="r-giftto" placeholder="For whom?"></div>' +
+    settleWhyHTML() +
     '<div class="rrow"><label>Payment method</label>' +
-      '<label class="payline"><input type="radio" name="r-pay" value="card" checked> Card</label>' +
-      '<label class="payline"><input type="radio" name="r-pay" value="crypto"> Crypto</label></div>' +
+      '<label class="payline"><input type="radio" name="r-pay" value="crypto" checked> Crypto <span class="rec">recommended</span></label>' +
+      '<label class="payline"><input type="radio" name="r-pay" value="card"> Card</label></div>' +
     '<div id="r-crypto-panel" style="display:none"></div>' +
+    '<div id="r-settle-note" class="settle-note" style="display:none"></div>' +
     '<button class="btn btn-primary" id="r-confirm" style="width:100%"></button>';
   document.getElementById("reserve-modal").classList.add("open");
   function payMode(){
@@ -789,6 +812,9 @@ function openReserve(sku){
     } else {
       panel.style.display = "none";
       panel.innerHTML = "";
+      const note = document.getElementById("r-settle-note");
+      if (md === "card-now"){ note.style.display = "block"; note.innerHTML = cardSettleNoteHTML(); }
+      else { note.style.display = "none"; note.innerHTML = ""; }
       btn.textContent =
         md === "card-now" ? "Continue to payment →" :
         md === "crypto-hosted" ? "Continue to crypto checkout →" :
@@ -838,7 +864,7 @@ function openReserve(sku){
       '<div class="receipt-big">' + esc(order.id) + '</div>' +
       '<p style="color:var(--muted);font-size:15px;margin-bottom:6px">' + qty + ' × ' + p.name + ' — $' + order.total_usd + ' USD</p>' +
       '<p style="color:var(--muted);font-size:14px;margin-bottom:22px">Reserved under ' + esc(wallet.slice(0,6)) + '…' + esc(wallet.slice(-4)) + '. ' +
-      (md === "card-now" ? 'Complete your card payment in the checkout tab — your goods ship once it clears.' :
+      (md === "card-now" ? 'Complete your card payment in the checkout tab \u2014 your goods ship once it clears. Card payments reach the treasury within 7\u201310 days, by manual transfer with full accounting.' :
        md === "crypto-hosted" ? 'Complete your crypto payment in the checkout tab — we verify on-chain before shipping.' :
        md === "crypto-manual" ? 'We\u2019ll verify your transaction on-chain, then ship. Keep this receipt.' :
        'No payment taken — we&rsquo;ll write to ' + esc(email) + ' at launch.') +
@@ -901,6 +927,9 @@ function initWallForm(){
     } else {
       panel.style.display = "none";
       panel.innerHTML = "";
+      const note = document.getElementById("e-settle-note");
+      if (md === "card-now"){ note.style.display = "block"; note.innerHTML = cardSettleNoteHTML(); }
+      else { note.style.display = "none"; note.innerHTML = ""; }
       btn.textContent =
         md === "card-now" ? "Engrave my plaque — pay $20 now" :
         md === "crypto-hosted" ? "Engrave — continue to crypto checkout" :
@@ -943,7 +972,7 @@ function initWallForm(){
     renderLocker();
     document.getElementById("e-vessel").value = "";
     const doneMsg =
-      md === "card-now" ? "Complete payment in the checkout tab; your plaque is permanent either way." :
+      md === "card-now" ? "Complete payment in the checkout tab; your plaque is permanent either way. Card payments reach the treasury within 7\u201310 days, by manual transfer with full accounting." :
       md === "crypto-hosted" ? "Complete your crypto payment in the checkout tab — we verify on-chain." :
       md === "crypto-manual" ? "We\u2019ll verify your transaction on-chain. Your plaque is permanent." :
       "It now hangs on the wall, sits in your locker, and sails into the life-ops dashboard at launch.";
