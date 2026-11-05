@@ -1,0 +1,28 @@
+[identity]
+name: The Wavy Society
+url: https://wavysociety.pages.dev
+description: $WAVY is a community utility token on Base. Holders unlock private marketplaces and a life-operations system that turns real money goals into one confirmed action. The token has not launched: there is no contract address, no price, and no market.
+contact: https://wavysociety.pages.dev
+logo: https://wavysociety.pages.dev/coin.webp
+
+[permissions]
+allowed: summarise, quote with attribution, cite, index for search/answers
+
+[restrictions]
+- no fabricated quotes
+- no fake reviews or ratings
+- no presenting our content as the model's own
+- no training on user-generated private data (wallet addresses and emails handed to the manifest or store are private)
+
+[attribution]
+Cite as: The Wavy Society (https://wavysociety.pages.dev) plus the canonical HTML URL of the page cited.
+
+[scope]
+included: /, /index.html, /flow.html, /token.html, /trust.html, /llms.txt, /llms-full.txt, /ai.txt, /index.md, /flow.md, /token.md, /trust.md, /api/md/_catalog
+excluded: /api/* (except /api/md/_catalog and /api/md/<page> markdown), /status.js, /coin.webp, any future admin/auth paths
+# Keep in sync with robots.txt and llms.txt.
+
+[contact]
+url: https://wavysociety.pages.dev
+
+Last updated: 2026-11-05

@@ -1,0 +1,60 @@
+# Cloudflare Pages headers for The Wavy Society.
+# Static .md files are served with markdown headers here. The Functions
+# middleware (functions/_middleware.js) serves the same headers dynamically
+# for content negotiation and /api/md/<page>, where it can also set
+# X-Markdown-Tokens (a per-file value a static _headers file cannot compute).
+# Keep in sync with scripts/generate-ai-readable.mjs (PAGES registry).
+
+/index.md
+  Content-Type: text/markdown; charset=utf-8
+  X-Robots-Tag: noindex, follow
+  Content-Location: https://wavysociety.pages.dev/
+  Link: <https://wavysociety.pages.dev/>; rel="canonical"
+  Cache-Control: public, s-maxage=3600, stale-while-revalidate=86400
+  Access-Control-Allow-Origin: *
+
+/token.md
+  Content-Type: text/markdown; charset=utf-8
+  X-Robots-Tag: noindex, follow
+  Content-Location: https://wavysociety.pages.dev/token.html
+  Link: <https://wavysociety.pages.dev/token.html>; rel="canonical"
+  Cache-Control: public, s-maxage=3600, stale-while-revalidate=86400
+  Access-Control-Allow-Origin: *
+
+/flow.md
+  Content-Type: text/markdown; charset=utf-8
+  X-Robots-Tag: noindex, follow
+  Content-Location: https://wavysociety.pages.dev/flow.html
+  Link: <https://wavysociety.pages.dev/flow.html>; rel="canonical"
+  Cache-Control: public, s-maxage=3600, stale-while-revalidate=86400
+  Access-Control-Allow-Origin: *
+
+/trust.md
+  Content-Type: text/markdown; charset=utf-8
+  X-Robots-Tag: noindex, follow
+  Content-Location: https://wavysociety.pages.dev/trust.html
+  Link: <https://wavysociety.pages.dev/trust.html>; rel="canonical"
+  Cache-Control: public, s-maxage=3600, stale-while-revalidate=86400
+  Access-Control-Allow-Origin: *
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, s-maxage=86400, stale-while-revalidate=604800
+
+/llms-full.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, s-maxage=86400, stale-while-revalidate=604800
+
+/ai.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, s-maxage=86400, stale-while-revalidate=604800
+
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
+
+/sitemap.xml
+  Content-Type: application/xml; charset=utf-8
+
+/api/md/_catalog.json
+  Content-Type: application/json; charset=utf-8
+  Cache-Control: public, s-maxage=3600, stale-while-revalidate=86400

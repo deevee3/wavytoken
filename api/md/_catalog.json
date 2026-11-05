@@ -1,0 +1,39 @@
+{
+  "site": "The Wavy Society",
+  "url": "https://wavysociety.pages.dev",
+  "generated_by": "scripts/generate-ai-readable.mjs",
+  "routes": [
+    {
+      "path": "/",
+      "markdown": "https://wavysociety.pages.dev/index.md",
+      "api": "https://wavysociety.pages.dev/api/md/index",
+      "title": "$WAVY — The Wavy Society",
+      "summary": "$WAVY is a community utility token on Base that has not launched. The Wavy Society offers private marketplaces and a life-operations service; the Ship's Store presale is open and presale payments land in the Treasury Safe on Base.",
+      "lastmod": "2026-10-10"
+    },
+    {
+      "path": "/token.html",
+      "markdown": "https://wavysociety.pages.dev/token.md",
+      "api": "https://wavysociety.pages.dev/api/md/token",
+      "title": "Token Status — The Wavy Society",
+      "summary": "$WAVY has not launched. There is no contract address. Planned standard: 100B supply on Base, 85% liquidity, 15% creator vesting over 1 year with a 30-day cliff.",
+      "lastmod": "2026-10-10"
+    },
+    {
+      "path": "/flow.html",
+      "markdown": "https://wavysociety.pages.dev/flow.md",
+      "api": "https://wavysociety.pages.dev/api/md/flow",
+      "title": "Capital Flow — The Wavy Society",
+      "summary": "How money moves through the Wavy Society today — presale payments to the Treasury Safe — and how the token would move at launch under the planned Bankr standard.",
+      "lastmod": "2026-10-05"
+    },
+    {
+      "path": "/trust.html",
+      "markdown": "https://wavysociety.pages.dev/trust.md",
+      "api": "https://wavysociety.pages.dev/api/md/trust",
+      "title": "Trust Center — The Wavy Society",
+      "summary": "What is live, what is not, and what a pending certificate means. The token has not launched; a pending certificate is not a balance.",
+      "lastmod": "2026-10-10"
+    }
+  ]
+}

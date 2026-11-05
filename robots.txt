@@ -1,0 +1,48 @@
+# robots.txt for https://wavysociety.pages.dev
+# AI search and user-fetch crawlers are explicitly allowed on public paths.
+# Keep in sync with /llms.txt and /ai.txt.
+# Training crawlers below are disallowed by default (no decision to allow
+# them has been made); blocking training does not stop citations from the
+# search bots above. To allow one, move it to the Allow group.
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: *
+Allow: /
+
+Sitemap: https://wavysociety.pages.dev/sitemap.xml
+# See also: https://wavysociety.pages.dev/llms.txt and https://wavysociety.pages.dev/ai.txt
